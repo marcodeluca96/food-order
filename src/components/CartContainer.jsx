@@ -7,11 +7,16 @@ import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
 import EmptyCart from '../img/emptyCart.svg';
 import CartItem from './CartItem';
+import { sendOrder } from '../utils/firebaseFunctions';
+import { Timestamp } from 'firebase/firestore';
+import { isTimeInRange } from '../utils/functions';
+import { useNavigate } from 'react-router-dom';
 
 const CartContainer = () => {
   const [{ cartShow, cartItems, user }, dispatch] = useStateValue();
   const [flag, setFlag] = useState(1);
   // const [tot, setTot] = useState(0);
+  const navigate = useNavigate();
 
   const showCart = () => {
     dispatch({
@@ -36,6 +41,25 @@ const CartContainer = () => {
     });
 
     localStorage.setItem('cartItems', JSON.stringify([]));
+  };
+
+  const handleOrder = async () => {
+    const orderData = {
+      uidUser: user.uid,
+      email: user.email,
+      username: user.displayName,
+      date: Timestamp.now(),
+      order: [...cartItems],
+    };
+
+    await sendOrder(orderData).then(() => {
+      clearCart();
+      dispatch({
+        type: actionType.SET_CART_SHOW,
+        cartShow: false,
+      });
+      navigate('/today-order');
+    });
   };
 
   return (
@@ -103,8 +127,11 @@ const CartContainer = () => {
                 whileTap={{ scale: 0.8 }}
                 type='button'
                 className='w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg my-2 hover:shadow-lg'
+                onClick={() => {
+                  if (isTimeInRange()) handleOrder();
+                }}
               >
-                Check Out
+                {isTimeInRange() ? 'Order' : 'Fuori Orario'}
               </motion.button>
             ) : (
               <motion.button
@@ -112,7 +139,7 @@ const CartContainer = () => {
                 type='button'
                 className='w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg my-2 hover:shadow-lg'
               >
-                Login to check out
+                Login to Order
               </motion.button>
             )}
           </div>

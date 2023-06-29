@@ -24,14 +24,28 @@ const HomeContainer = ({ scrollToMenu }) => {
         </div> */}
 
         <p className='text-[2.5rem] lg:text-[4.5rem] font-bold tracking-wide text-headingColor'>
-          Il tuo pranzo in
+          Il tuo pranzo in{' '}
           <span className='text-orange-600 text-[3rem] lg:text-[5rem]'>
             Weave
           </span>
         </p>
 
         <p className='text-base text-textColor text-center md:text-left md:w-[80%]'>
-          Benvenuto, qui potrai ordinare ....
+          Benvenuto, qui potrai ordinare il tuo pranzo. <br />
+          <b>Attenzione! </b>
+          <br />
+          Ora si potranno effettuare più ordini (nel caso qualcuno voglia
+          aggiungere qualcosa dopo) ed eliminare i vostri ordini (in caso vi sia
+          passata la fame &#128514;). Tutto questo si può fare<b>
+            {' '}
+            entro{' '}
+          </b>le <b>12:40 </b>
+          del giorno corrente, altrimenti vi attaccate al vostro/a coso/a
+          preferito/a.
+          <br />
+          Se vuoi qualcosa che non è presente nel menù chiedi e ti sarà dato.
+          <br />
+          Grazie &#128536;
         </p>
 
         <button

@@ -67,13 +67,13 @@ const Header = () => {
             exit={{ opacity: 0, x: 200 }}
             className='flex items-center gap-24 '
           >
+            <li className='text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
+              <Link to={'/today-order'}>Ordine</Link>
+            </li>
+            <li className='text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
+              <Link to={'/admin-order'}>Admin</Link>
+            </li>
             {/* <li className='text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
-              Home
-            </li>
-            <li className='text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
-              Menu
-            </li>
-            <li className='text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
               About
             </li> */}
             {/* <li className='text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
@@ -177,20 +177,20 @@ const Header = () => {
                 </Link>
               )}
 
-              {/* <ul className='flex flex-col '>
+              <ul className='flex flex-col '>
                 <li
                   className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2'
                   onClick={() => setIsMenu(false)}
                 >
-                  Home
+                  <Link to={'/today-order'}>Ordine</Link>
                 </li>
                 <li
                   className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2'
                   onClick={() => setIsMenu(false)}
                 >
-                  Menu
+                  <Link to={'/admin-order'}>Admin</Link>
                 </li>
-                <li
+                {/* <li
                   className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2'
                   onClick={() => setIsMenu(false)}
                 >
@@ -201,8 +201,8 @@ const Header = () => {
                   onClick={() => setIsMenu(false)}
                 >
                   Service
-                </li>
-              </ul> */}
+                </li> */}
+              </ul>
 
               <p
                 className='m-2 p-2 rounded-md shadow-md flex items-center justify-center bg-gray-200 gap-3 cursor-pointer hover:bg-gray-300 transition-all duration-100 ease-in-out text-textColor text-base'

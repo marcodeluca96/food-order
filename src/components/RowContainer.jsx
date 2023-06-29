@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import NotFound from '../img/NotFound.svg';
 import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
+import { shuffleArray } from '../utils/functions';
 
 const RowContainer = ({ flag, data, scrollValue }) => {
   const rowContainer = useRef();
@@ -46,8 +47,8 @@ const RowContainer = ({ flag, data, scrollValue }) => {
 
   const newData = data
     ? search === ''
-      ? [...data]
-      : data.filter((it) => it.title.includes(search))
+      ? shuffleArray(data)
+      : shuffleArray(data.filter((it) => it.title.includes(search)))
     : null;
 
   return (

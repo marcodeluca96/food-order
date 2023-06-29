@@ -67,9 +67,11 @@ const Header = () => {
             exit={{ opacity: 0, x: 200 }}
             className='flex items-center gap-24 '
           >
-            <li className='text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
-              <Link to={'/today-order'}>Ordine</Link>
-            </li>
+            {user && (
+              <li className='text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
+                <Link to={'/today-order'}>Ordine</Link>
+              </li>
+            )}
             {user && user.email === 'marco.deluca@weavesrl.com' && (
               <li className='text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
                 <Link to={'/admin-order'}>Admin</Link>
@@ -83,19 +85,21 @@ const Header = () => {
             </li> */}
           </motion.ul>
 
-          <div
-            className='relative flex items-center justify-center'
-            onClick={showCart}
-          >
-            <MdShoppingBasket className='text-textColor text-2xl  cursor-pointer' />
-            {cartItems && cartItems.length > 0 && (
-              <div className=' absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center'>
-                <p className='text-xs text-white font-semibold'>
-                  {cartItems.length}
-                </p>
-              </div>
-            )}
-          </div>
+          {user && (
+            <div
+              className='relative flex items-center justify-center'
+              onClick={showCart}
+            >
+              <MdShoppingBasket className='text-textColor text-2xl  cursor-pointer' />
+              {cartItems && cartItems.length > 0 && (
+                <div className=' absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center'>
+                  <p className='text-xs text-white font-semibold'>
+                    {cartItems.length}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
 
           <div className='relative'>
             <motion.img
@@ -137,19 +141,21 @@ const Header = () => {
 
       {/* mobile */}
       <div className='flex items-center justify-between md:hidden w-full h-full '>
-        <div
-          className='relative flex items-center justify-center'
-          onClick={showCart}
-        >
-          <MdShoppingBasket className='text-textColor text-2xl  cursor-pointer' />
-          {cartItems && cartItems.length > 0 && (
-            <div className=' absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center'>
-              <p className='text-xs text-white font-semibold'>
-                {cartItems.length}
-              </p>
-            </div>
-          )}
-        </div>
+        {user && (
+          <div
+            className='relative flex items-center justify-center'
+            onClick={showCart}
+          >
+            <MdShoppingBasket className='text-textColor text-2xl  cursor-pointer' />
+            {cartItems && cartItems.length > 0 && (
+              <div className=' absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center'>
+                <p className='text-xs text-white font-semibold'>
+                  {cartItems.length}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
 
         <Link to={'/'} className='flex items-center gap-2'>
           <img src={Logo} className='w-8 object-cover' alt='logo' />
@@ -179,22 +185,23 @@ const Header = () => {
                 </Link>
               )}
 
-              <ul className='flex flex-col '>
-                <li
-                  className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2'
-                  onClick={() => setIsMenu(false)}
-                >
-                  <Link to={'/today-order'}>Ordine</Link>
-                </li>
-                {user && user.email === 'marco.deluca@weavesrl.com' && (
+              {user && (
+                <ul className='flex flex-col '>
                   <li
                     className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2'
                     onClick={() => setIsMenu(false)}
                   >
-                    <Link to={'/admin-order'}>Admin</Link>
+                    <Link to={'/today-order'}>Ordine</Link>
                   </li>
-                )}
-                {/* <li
+                  {user && user.email === 'marco.deluca@weavesrl.com' && (
+                    <li
+                      className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2'
+                      onClick={() => setIsMenu(false)}
+                    >
+                      <Link to={'/admin-order'}>Admin</Link>
+                    </li>
+                  )}
+                  {/* <li
                   className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2'
                   onClick={() => setIsMenu(false)}
                 >
@@ -206,7 +213,8 @@ const Header = () => {
                 >
                   Service
                 </li> */}
-              </ul>
+                </ul>
+              )}
 
               <p
                 className='m-2 p-2 rounded-md shadow-md flex items-center justify-center bg-gray-200 gap-3 cursor-pointer hover:bg-gray-300 transition-all duration-100 ease-in-out text-textColor text-base'

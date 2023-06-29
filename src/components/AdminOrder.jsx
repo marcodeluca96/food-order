@@ -36,7 +36,7 @@ const AdminOrder = () => {
       className='w-full min-h-screen flex items-center justify-center'
     >
       <div className=' flex flex-col gap-4 mt-16 mr-4 ml-4 items-center justify-start text-center'>
-        {!isLoading && order ? (
+        {!isLoading ? (order.length>0 ? (
           order.map((it) => (
             <div key={it.id} className='mb-2'>
               <h3 className='mb-2'>
@@ -87,7 +87,7 @@ const AdminOrder = () => {
               </motion.button>
             </div>
           ))
-        ) : (
+        ):<h2>No Orders</h2>) : (
           <Loader />
         )}
       </div>

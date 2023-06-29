@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import RowContainer from './RowContainer';
 import { useStateValue } from '../context/StateProvider';
 
-const MenuContainer = () => {
+const MenuContainer = ({ menuRef }) => {
   const [filter, setFilter] = useState('panini');
 
   const [{ foodItems }, dispatch] = useStateValue();
@@ -17,7 +17,10 @@ const MenuContainer = () => {
           I nostri piatti
         </p>
 
-        <div className='w-full flex items-center justify-start lg:justify-center gap-8 py-6 overflow-x-scroll scrollbar-none'>
+        <div
+          className='w-full flex items-center justify-start lg:justify-center gap-8 py-6 overflow-x-scroll scrollbar-none'
+          ref={menuRef}
+        >
           {categories &&
             categories.map((category) => (
               <motion.div

@@ -28,6 +28,21 @@ const RowContainer = ({ flag, data, scrollValue }) => {
     addtocart();
   }, [items]);
 
+  const addItemToCart = (item) => {
+    const alreadyInCart = cartItems.some((i) => i.id === item.id);
+    if (!alreadyInCart) {
+      setItems([...cartItems, item]);
+    } else {
+      const newItems = cartItems.map((i) => {
+        if (i.id === item.id) {
+          return { ...i, qty: i.qty + item.qty };
+        }
+        return i;
+      });
+      setItems([...newItems]);
+    }
+  };
+
   return (
     <div
       ref={rowContainer}
@@ -57,7 +72,7 @@ const RowContainer = ({ flag, data, scrollValue }) => {
               <motion.div
                 whileTap={{ scale: 0.75 }}
                 className='w-8 h-8 rounded-full bg-red-600 flex items-center justify-center cursor-pointer hover:shadow-md -mt-8'
-                onClick={() => setItems([...cartItems, item])}
+                onClick={() => addItemToCart(item)}
               >
                 <MdShoppingBasket className='text-white' />
               </motion.div>

@@ -51,6 +51,14 @@ const CartItem = ({ item, setFlag, flag }) => {
     items = cartItems;
   }, [qty, items]);
 
+  useEffect(() => {
+    cartItems.forEach((i) => {
+      if (i.id === item.id) {
+        setQty(i.qty);
+      }
+    });
+  }, [cartItems]);
+
   return (
     <div className='w-full p-1 px-2 rounded-lg bg-cartItem flex items-center gap-2'>
       <img

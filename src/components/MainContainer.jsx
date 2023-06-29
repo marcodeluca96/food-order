@@ -11,11 +11,17 @@ const MainContainer = () => {
   const [{ foodItems, cartShow }, dispatch] = useStateValue();
   const [scrollValue, setScrollValue] = useState(0);
 
+  const menuRef = useRef();
+
+  const scrollToMenu = () => {
+    menuRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
   useEffect(() => {}, [scrollValue, cartShow]);
 
   return (
     <div className='w-full h-auto flex flex-col items-center justify-center '>
-      <HomeContainer />
+      <HomeContainer scrollToMenu={scrollToMenu} />
 
       {/* <section className="w-full my-6">
         <div className="w-full flex items-center justify-between">
@@ -47,7 +53,7 @@ const MainContainer = () => {
         />
       </section> */}
 
-      <MenuContainer />
+      <MenuContainer menuRef={menuRef} />
 
       {cartShow && <CartContainer />}
     </div>

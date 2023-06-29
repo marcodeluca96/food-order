@@ -3,7 +3,7 @@ import Delivery from '../img/delivery.png';
 import HeroBg from '../img/heroBg.png';
 import { heroData } from '../utils/data';
 
-const HomeContainer = () => {
+const HomeContainer = ({ scrollToMenu }) => {
   return (
     <section
       className='grid grid-cols-1 md:grid-cols-2 gap-2 w-full '
@@ -37,6 +37,7 @@ const HomeContainer = () => {
         <button
           type='button'
           className='bg-gradient-to-br from-orange-400 to-orange-500 w-full md:w-auto px-4 py-2  rounded-lg hover:shadow-lg transition-all ease-in-out duration-100'
+          onClick={() => scrollToMenu()}
         >
           Order Now
         </button>

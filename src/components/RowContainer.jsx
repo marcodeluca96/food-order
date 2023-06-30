@@ -48,7 +48,11 @@ const RowContainer = ({ flag, data, scrollValue }) => {
   const newData = data
     ? search === ''
       ? shuffleArray(data)
-      : shuffleArray(data.filter((it) => it.title.includes(search)))
+      : shuffleArray(
+          data.filter((it) =>
+            it.title.toLowerCase().includes(search.toLowerCase())
+          )
+        )
     : null;
 
   return (

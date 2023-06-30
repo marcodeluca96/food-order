@@ -25,7 +25,7 @@ const CreateContainer = () => {
   const [title, setTitle] = useState('');
   // const [calories, setCalories] = useState("");
   // const [price, setPrice] = useState('');
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState('Select Category');
   const [imageAsset, setImageAsset] = useState(null);
   const [fields, setFields] = useState(false);
   const [alertStatus, setAlertStatus] = useState('danger');
@@ -89,7 +89,12 @@ const CreateContainer = () => {
     setIsLoading(true);
     try {
       // if (!title || !calories || !imageAsset || !price || !category) {
-      if (!title || !imageAsset || !category) {
+      if (
+        !title ||
+        !imageAsset ||
+        !category ||
+        category === 'Select Category'
+      ) {
         setFields(true);
         setMsg("Required fields can't be empty");
         setAlertStatus('danger');
@@ -180,6 +185,7 @@ const CreateContainer = () => {
 
         <div className='w-full'>
           <select
+            value={category}
             onChange={(e) => setCategory(e.target.value)}
             className='outline-none w-full text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer'
           >

@@ -1,8 +1,10 @@
+import { shuffleArray } from '../utils/functions';
+
 export const actionType = {
-  SET_USER: "SET_USER",
-  SET_FOOD_ITEMS: "SET_FOOD_ITEMS",
-  SET_CART_SHOW: "SET_CART_SHOW",
-  SET_CARTITEMS: "SET_CARTITEMS",
+  SET_USER: 'SET_USER',
+  SET_FOOD_ITEMS: 'SET_FOOD_ITEMS',
+  SET_CART_SHOW: 'SET_CART_SHOW',
+  SET_CARTITEMS: 'SET_CARTITEMS',
 };
 
 const reducer = (state, action) => {
@@ -18,7 +20,7 @@ const reducer = (state, action) => {
     case actionType.SET_FOOD_ITEMS:
       return {
         ...state,
-        foodItems: action.foodItems,
+        foodItems: shuffleArray(action.foodItems),
       };
 
     case actionType.SET_CART_SHOW:

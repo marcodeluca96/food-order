@@ -11,10 +11,15 @@ import { sendOrder } from '../utils/firebaseFunctions';
 import { Timestamp } from 'firebase/firestore';
 import { isTimeInRange } from '../utils/functions';
 import { useNavigate } from 'react-router-dom';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { app } from '../firebase.config';
 
 const CartContainer = () => {
   const [{ cartShow, cartItems, user }, dispatch] = useStateValue();
   const [flag, setFlag] = useState(1);
+  const firebaseAuth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
   // const [tot, setTot] = useState(0);
   const navigate = useNavigate();
 
@@ -23,6 +28,21 @@ const CartContainer = () => {
       type: actionType.SET_CART_SHOW,
       cartShow: !cartShow,
     });
+  };
+
+  const login = async () => {
+    if (!user) {
+      const {
+        user: { refreshToken, providerData },
+      } = await signInWithPopup(firebaseAuth, provider);
+      dispatch({
+        type: actionType.SET_USER,
+        user: providerData[0],
+      });
+      localStorage.setItem('user', JSON.stringify(providerData[0]));
+    } else {
+      // setIsMenu(!isMenu);
+    }
   };
 
   useEffect(() => {
@@ -138,6 +158,7 @@ const CartContainer = () => {
                 whileTap={{ scale: 0.8 }}
                 type='button'
                 className='w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg my-2 hover:shadow-lg'
+                onClick={login}
               >
                 Login to Order
               </motion.button>

@@ -81,7 +81,7 @@ const RowContainer = ({ flag, data, scrollValue }) => {
           newData.map((item) => (
             <div
               key={item?.id}
-              className='w-275 h-[175px] min-w-[275px] md:w-300 md:min-w-[300px]  bg-cardOverlay rounded-lg py-2 px-4  my-12 backdrop-blur-lg hover:drop-shadow-lg flex flex-col items-center justify-evenly relative'
+              className='w-275 h-[175px] min-w-[275px] md:w-300 md:min-w-[300px]  bg-cardOverlay rounded-lg py-2 px-4  backdrop-blur-lg hover:drop-shadow-lg flex flex-col items-center justify-evenly relative'
             >
               <div className='w-full flex items-center justify-between'>
                 <motion.div

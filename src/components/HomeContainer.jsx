@@ -1,9 +1,44 @@
-import React from 'react';
-import Delivery from '../img/delivery.png';
+import React, { useEffect, useState } from 'react';
 import HeroBg from '../img/heroBg.png';
-import { heroData } from '../utils/data';
+import { MdShoppingBasket } from 'react-icons/md';
+import { motion } from 'framer-motion';
+import { useStateValue } from '../context/StateProvider';
+import { actionType } from '../context/reducer';
 
 const HomeContainer = ({ scrollToMenu }) => {
+  const [{ foodOfTheDay }] = useStateValue();
+
+  const [items, setItems] = useState([]);
+
+  const [{ cartItems }, dispatch] = useStateValue();
+
+  const addtocart = () => {
+    dispatch({
+      type: actionType.SET_CARTITEMS,
+      cartItems: items,
+    });
+    localStorage.setItem('cartItems', JSON.stringify(items));
+  };
+
+  useEffect(() => {
+    addtocart();
+  }, [items]);
+
+  const addItemToCart = (item) => {
+    const alreadyInCart = cartItems.some((i) => i.id === item.id);
+    if (!alreadyInCart) {
+      setItems([...cartItems, item]);
+    } else {
+      const newItems = cartItems.map((i) => {
+        if (i.id === item.id) {
+          return { ...i, qty: i.qty + item.qty };
+        }
+        return i;
+      });
+      setItems([...newItems]);
+    }
+  };
+
   return (
     <section
       className='grid grid-cols-1 md:grid-cols-2 gap-2 w-full '
@@ -64,7 +99,7 @@ const HomeContainer = ({ scrollToMenu }) => {
         />
 
         <div className='w-full h-full absolute top-0 left-0 flex items-center justify-center lg:px-32  py-4 gap-4 flex-wrap'>
-          {heroData &&
+          {/* {heroData &&
             heroData.map((n) => (
               <div
                 key={n.id}
@@ -84,10 +119,36 @@ const HomeContainer = ({ scrollToMenu }) => {
                 </p>
 
                 <p className='text-sm font-semibold text-headingColor'>
-                  {/* <span className='text-xs text-red-600'>$</span> {n.price} */}
+                  <span className='text-xs text-red-600'>$</span> {n.price}
                 </p>
               </div>
-            ))}
+            ))} */}
+
+          {foodOfTheDay && (
+            <div className='  lg:w-190  p-4 bg-cardOverlay backdrop-blur-md rounded-3xl flex flex-col items-center justify-center drop-shadow-lg'>
+              <img
+                src={foodOfTheDay.imageURL}
+                className='w-20 lg:w-40 -mt-10 lg:-mt-20 '
+                alt='I1'
+              />
+              <motion.div
+                whileTap={{ scale: 0.75 }}
+                className='w-8 h-8 rounded-full bg-red-600 flex items-center justify-center cursor-pointer hover:shadow-md -mt-8'
+                onClick={() => addItemToCart(foodOfTheDay)}
+              >
+                <MdShoppingBasket className='text-white' />
+              </motion.div>
+              <p className='text-base lg:text-xl font-semibold text-textColor mt-2 lg:mt-4'>
+                Scelta del giorno
+              </p>
+
+              <p className='text-[12px] lg:text-sm text-lighttextGray font-semibold my-1 lg:my-3'>
+                {foodOfTheDay.title}
+              </p>
+
+              <p className='text-sm font-semibold text-headingColor'></p>
+            </div>
+          )}
         </div>
       </div>
     </section>

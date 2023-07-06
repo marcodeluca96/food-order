@@ -3,25 +3,36 @@ import { Route, Routes } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { CreateContainer, Header, MainContainer } from './components';
 import { useStateValue } from './context/StateProvider';
-import { getAllFoodItems } from './utils/firebaseFunctions';
+import {
+  getAllFoodItems,
+  getFoodOfTheDay,
+  saveFoodOfTheDay,
+} from './utils/firebaseFunctions';
 import { actionType } from './context/reducer';
 import TodayOrder from './components/TodayOrder';
 import AdminOrder from './components/AdminOrder';
 
 const App = () => {
-  const [{ foodItems, user }, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
 
   const fetchData = async () => {
-    await getAllFoodItems().then((data) => {
+    await getAllFoodItems().then(async (data) => {
       dispatch({
         type: actionType.SET_FOOD_ITEMS,
         foodItems: data,
       });
+      await saveFoodOfTheDay(data);
     });
   };
 
-  useEffect(() => {
-    fetchData();
+  useEffect(async () => {
+    await fetchData();
+    await getFoodOfTheDay().then((data) => {
+      dispatch({
+        type: actionType.SET_FOOD_OF_DAY,
+        foodOfTheDay: data,
+      });
+    });
   }, []);
 
   return (

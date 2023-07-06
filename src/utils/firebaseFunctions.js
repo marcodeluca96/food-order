@@ -2,6 +2,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   orderBy,
   query,
@@ -9,12 +10,72 @@ import {
   where,
 } from 'firebase/firestore';
 import { firestore } from '../firebase.config';
+import { randomItem } from './functions';
 
 // Saving new Item
 export const saveItem = async (data) => {
   await setDoc(doc(firestore, 'foodItems', `${Date.now()}`), data, {
     merge: true,
   });
+};
+
+// Check food of the day is set already
+const checkCanSetFood = async () => {
+  const docSnap = await getDoc(doc(firestore, 'foodOfTheDay', '1'));
+
+  if (docSnap.exists()) {
+    const timestamp = docSnap.data().date;
+
+    // Get the current date
+    const currentDate = new Date();
+
+    // Get the timestamp for the start of the current day
+    const startOfDay = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate()
+    ).getTime();
+
+    // Get the timestamp for the end of the current day
+    const endOfDay = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate() + 1
+    ).getTime();
+
+    // Check if the timestamp falls within the current day
+    return !(timestamp >= startOfDay && timestamp < endOfDay);
+  } else {
+    return true;
+  }
+};
+
+// Saving food of the day
+export const saveFoodOfTheDay = async (data) => {
+  const check = await checkCanSetFood();
+  if (check) {
+    await setDoc(
+      doc(firestore, 'foodOfTheDay', `1`),
+      {
+        date: `${Date.now()}`,
+        food: randomItem(data.filter((it) => it.category === 'panini')),
+      },
+      {
+        merge: true,
+      }
+    );
+  }
+};
+
+// getall food items
+export const getFoodOfTheDay = async () => {
+  const docSnap = await getDoc(doc(firestore, 'foodOfTheDay', '1'));
+
+  if (docSnap.exists()) {
+    return docSnap.data().food;
+  } else {
+    return null;
+  }
 };
 
 // getall food items

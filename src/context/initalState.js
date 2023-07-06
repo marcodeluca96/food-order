@@ -1,4 +1,4 @@
-import { fetchCart, fetchUser } from "../utils/fetchLocalStorageData";
+import { fetchCart, fetchUser } from '../utils/fetchLocalStorageData';
 
 const userInfo = fetchUser();
 const cartInfo = fetchCart();
@@ -8,4 +8,5 @@ export const initialState = {
   foodItems: null,
   cartShow: false,
   cartItems: cartInfo,
+  foodOfTheDay: null,
 };

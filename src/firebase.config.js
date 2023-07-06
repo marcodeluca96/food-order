@@ -1,3 +1,4 @@
+import { getMessaging } from '@firebase/messaging';
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
@@ -15,5 +16,6 @@ const app = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig);
 
 const firestore = getFirestore(app);
 const storage = getStorage(app);
+const messaging = getMessaging(app);
 
-export { app, firestore, storage };
+export { app, firestore, storage, messaging };

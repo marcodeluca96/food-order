@@ -1,4 +1,4 @@
-import { randomItem, shuffleArray } from '../utils/functions';
+import { shuffleArray } from '../utils/functions';
 
 export const actionType = {
   SET_USER: 'SET_USER',

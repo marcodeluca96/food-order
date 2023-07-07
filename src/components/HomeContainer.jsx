@@ -75,8 +75,7 @@ const HomeContainer = ({ scrollToMenu }) => {
             {' '}
             entro{' '}
           </b>le <b>12:40 </b>
-          del giorno corrente, altrimenti vi attaccate al vostro/a coso/a
-          preferito/a.
+          del giorno corrente.
           <br />
           Se vuoi qualcosa che non è presente nel menù chiedi e ti sarà dato.
           <br />

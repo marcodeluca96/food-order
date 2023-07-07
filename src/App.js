@@ -12,6 +12,7 @@ import { actionType } from './context/reducer';
 import TodayOrder from './components/TodayOrder';
 import AdminOrder from './components/AdminOrder';
 import { getTokenFunc, onMessageListener } from './firebase-message';
+import SummaryOrder from './components/SummaryOrder';
 const App = () => {
   const [{ user }, dispatch] = useStateValue();
   const [isTokenFound, setTokenFound] = useState(false);
@@ -60,6 +61,9 @@ const App = () => {
             <Route path='/today-order' element={<TodayOrder />} />
             {user && user.email === 'marco.deluca@weavesrl.com' && (
               <Route path='/admin-order' element={<AdminOrder />} />
+            )}
+            {user && user.email === 'marco.deluca@weavesrl.com' && (
+              <Route path='/summary-order' element={<SummaryOrder />} />
             )}
           </Routes>
         </main>

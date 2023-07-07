@@ -1,12 +1,10 @@
-// Scripts for firebase and firebase messaging
+// // Scripts for firebase and firebase messaging
+importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js');
 importScripts(
-  'https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js'
-);
-importScripts(
-  'https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js'
+  'https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js'
 );
 
-// Initialize the Firebase app in the service worker by passing the generated config
+// // Initialize the Firebase app in the service worker by passing the generated config
 var firebaseConfig = {
   apiKey: 'AIzaSyCohspPgGtY6YYrnw-lOyNdmgCJejvNzoI',
   authDomain: 'food-order-4d70e.firebaseapp.com',
@@ -18,7 +16,7 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-// Retrieve firebase messaging
+// // Retrieve firebase messaging
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage(function (payload) {

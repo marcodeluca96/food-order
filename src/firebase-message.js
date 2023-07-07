@@ -4,7 +4,7 @@ import { messaging } from './firebase.config';
 export const getTokenFunc = (setTokenFound) => {
   return getToken(messaging, {
     vapidKey:
-      'BNBHReyyT2lELbtFaRAb2jmOM5k3ID1NpIsNL1gtpALFsBmB9d6rZq-Z1F1uV55EaYUby6fjrYGWKOFdazWLKDQ',
+      'BCWAbig5xvC3Angc43KERQJV3muDaoh0OXiMROFUk1H9LvT9URXf8Q_V4-YYtOn5F62T5IFCCRHP4Dl9NegU-h0',
   })
     .then((currentToken) => {
       if (currentToken) {
@@ -28,7 +28,9 @@ export const getTokenFunc = (setTokenFound) => {
 
 export const onMessageListener = () =>
   new Promise((resolve) => {
+    console.log('onMessageListener');
     onMessage(messaging, (payload) => {
+      console.log('mss list arrived');
       resolve(payload);
     });
   });

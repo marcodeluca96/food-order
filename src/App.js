@@ -12,23 +12,11 @@ import { actionType } from './context/reducer';
 import TodayOrder from './components/TodayOrder';
 import AdminOrder from './components/AdminOrder';
 import { getTokenFunc, onMessageListener } from './firebase-message';
-
 const App = () => {
   const [{ user }, dispatch] = useStateValue();
   const [isTokenFound, setTokenFound] = useState(false);
   const [show, setShow] = useState(false);
   const [notification, setNotification] = useState({ title: '', body: '' });
-
-  onMessageListener()
-    .then((payload) => {
-      setShow(true);
-      setNotification({
-        title: payload.notification.title,
-        body: payload.notification.body,
-      });
-      console.log(payload);
-    })
-    .catch((err) => console.log('failed: ', err));
 
   const fetchData = async () => {
     await getAllFoodItems().then(async (data) => {
@@ -49,6 +37,16 @@ const App = () => {
       });
     });
     getTokenFunc(setTokenFound);
+    onMessageListener()
+      .then((payload) => {
+        setShow(true);
+        setNotification({
+          title: payload.notification.title,
+          body: payload.notification.body,
+        });
+        console.log(payload);
+      })
+      .catch((err) => console.log('failed: ', err));
   }, []);
 
   return (

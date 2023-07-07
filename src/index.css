@@ -66,6 +66,11 @@ input:hover {
   width: 100%;
   justify-content: center;
 }
+
+.cart-container {
+  height: 80vh;
+}
+
 @media (max-width: 768px) {
   .group {
     max-width: 100%;

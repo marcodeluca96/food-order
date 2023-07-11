@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Loader from './Loader';
-import { deleteOrder, getAllTodayOrder } from '../utils/firebaseFunctions';
+import { getAllTodayOrder } from '../utils/firebaseFunctions';
 import { useStateValue } from '../context/StateProvider';
 import CartContainer from './CartContainer';
 import { orderSummary } from '../utils/functions';
+import LoopIcon from '@mui/icons-material/Loop';
 
 const SummaryOrder = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,9 +21,10 @@ const SummaryOrder = () => {
     });
   }, []);
 
-  const handleDelete = async (id) => {
-    await deleteOrder(id);
+  const refresh = async () => {
+    setIsLoading(true);
     await getAllTodayOrder().then((res) => {
+      // console.log(res);
       setSummary(orderSummary([...res]));
       setIsLoading(false);
     });
@@ -35,8 +37,16 @@ const SummaryOrder = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className='w-full min-h-screen flex items-start justify-center'
+      className='w-full flex-col min-h-screen flex items-center justify-center'
     >
+      {!isLoading && (
+        <div className='flex justify-end w-full'>
+          <LoopIcon
+            sx={{ color: 'grey', cursor: 'pointer' }}
+            onClick={refresh}
+          />
+        </div>
+      )}
       <div className=' flex flex-col gap-4 mt-16 mr-4 ml-4 items-center justify-start text-center'>
         {!isLoading ? (
           summary ? (

@@ -155,3 +155,11 @@ export function orderSummary(orders) {
 
   return summary;
 }
+
+export function totCartItems(cartItems) {
+  let sum = 0;
+  cartItems.forEach((it) => {
+    sum += it.qty;
+  });
+  return sum;
+}

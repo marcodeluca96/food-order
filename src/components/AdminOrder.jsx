@@ -42,6 +42,7 @@ const AdminOrder = () => {
                   Ordine n° <b>{it.id}</b>
                 </h3>
                 <p>Utente: {it.data.username}</p>
+                {it.data.note && <p>Note: {it.data.note}</p>}
                 {it.data.order.map((or) => (
                   <div
                     key={or?.id}

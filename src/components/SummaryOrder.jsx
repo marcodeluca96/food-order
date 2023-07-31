@@ -92,6 +92,11 @@ const SummaryOrder = () => {
                           {it.food.map((f, i) => (
                             <li key={i}>{f}</li>
                           ))}
+                          {it.note && (
+                            <li>
+                              <b style={{ color: 'red' }}>Note:</b> {it.note}
+                            </li>
+                          )}
                         </ul>
                       </div>
                     ))}

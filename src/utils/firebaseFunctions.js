@@ -112,7 +112,7 @@ export const getAllTodayOrder = async () => {
     currentDate.getFullYear(),
     currentDate.getMonth(),
     currentDate.getDate(),
-    19,
+    13,
     40,
     0
   );
@@ -150,7 +150,7 @@ export const getUserTodayOrder = async (uid) => {
     currentDate.getFullYear(),
     currentDate.getMonth(),
     currentDate.getDate(),
-    19,
+    12,
     40,
     0
   );

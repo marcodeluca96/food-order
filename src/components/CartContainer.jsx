@@ -17,6 +17,7 @@ import { app } from '../firebase.config';
 const CartContainer = () => {
   const [{ cartShow, cartItems, user }, dispatch] = useStateValue();
   const [flag, setFlag] = useState(1);
+  const [search, setSearch] = useState('');
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
@@ -70,6 +71,7 @@ const CartContainer = () => {
       username: user.displayName,
       date: Timestamp.now(),
       order: [...cartItems],
+      note: search,
     };
 
     await sendOrder(orderData).then(() => {
@@ -106,7 +108,7 @@ const CartContainer = () => {
 
       {/* bottom section */}
       {cartItems && cartItems.length > 0 ? (
-        <div className='w-full h-full bg-cartBg rounded-t-[2rem] flex flex-col justify-between'>
+        <div className='w-full h-full bg-cartBg rounded-t-[2rem] flex flex-col justify-between pb-20'>
           {/* cart Items section */}
           <div className='w-full md:h-42 px-6 py-10 flex flex-col gap-3 overflow-y-scroll scrollbar-none cart-container'>
             {/* cart Item */}
@@ -143,16 +145,26 @@ const CartContainer = () => {
             </div> */}
 
             {user ? (
-              <motion.button
-                whileTap={{ scale: 0.8 }}
-                type='button'
-                className='w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg my-2 hover:shadow-lg'
-                onClick={() => {
-                  if (isTimeInRange()) handleOrder();
-                }}
-              >
-                {isTimeInRange() ? 'Order' : 'Fuori Orario'}
-              </motion.button>
+              <>
+                <div className='note_div'>
+                  <input
+                    placeholder='Note aggiuntive'
+                    type='text'
+                    className='note_input'
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
+                </div>
+                <motion.button
+                  whileTap={{ scale: 0.8 }}
+                  type='button'
+                  className='w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg my-2 hover:shadow-lg'
+                  onClick={() => {
+                    if (isTimeInRange()) handleOrder();
+                  }}
+                >
+                  {isTimeInRange() ? 'Order' : 'Fuori Orario'}
+                </motion.button>
+              </>
             ) : (
               <motion.button
                 whileTap={{ scale: 0.8 }}

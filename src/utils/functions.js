@@ -3,7 +3,7 @@ export const isTimeInRange = () => {
   const hours = now.getHours();
   const minutes = now.getMinutes();
 
-  if (hours < 12 || (hours === 12 && minutes <= 40)) {
+  if (hours < 13 /*|| (hours === 12 && minutes <= 40)*/) {
     return true;
   }
 
@@ -150,7 +150,11 @@ export function orderSummary(orders) {
       }
     });
     //ordini di chi sono
-    summary.orders.push({ user: o.data.username, food: userOrderTitles });
+    summary.orders.push({
+      user: o.data.username,
+      food: userOrderTitles,
+      note: o.data.note,
+    });
   });
 
   return summary;

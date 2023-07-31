@@ -4,6 +4,9 @@ import { MdShoppingBasket } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
+// import PANINO_IMG from '../img/panino-generale.png';
+const PANINO_IMG =
+  'https://firebasestorage.googleapis.com/v0/b/food-order-4d70e.appspot.com/o/Images%2F1688110875145-panino-generale.png?alt=media&token=262e0c05-1986-4399-a88f-25827a127cc0';
 
 const HomeContainer = ({ scrollToMenu }) => {
   const [{ foodOfTheDay }] = useStateValue();
@@ -38,7 +41,7 @@ const HomeContainer = ({ scrollToMenu }) => {
       setItems([...newItems]);
     }
   };
-
+  console.log(foodOfTheDay);
   return (
     <section
       className='grid grid-cols-1 md:grid-cols-2 gap-2 w-full '
@@ -123,7 +126,7 @@ const HomeContainer = ({ scrollToMenu }) => {
               </div>
             ))} */}
 
-          {foodOfTheDay && (
+          {/* {foodOfTheDay && (
             <div className='  lg:w-190  p-4 bg-cardOverlay backdrop-blur-md rounded-3xl flex flex-col items-center justify-center drop-shadow-lg'>
               <img
                 src={foodOfTheDay.imageURL}
@@ -147,7 +150,38 @@ const HomeContainer = ({ scrollToMenu }) => {
 
               <p className='text-sm font-semibold text-headingColor'></p>
             </div>
-          )}
+          )} */}
+          <div className='  lg:w-190  p-4 bg-cardOverlay backdrop-blur-md rounded-3xl flex flex-col items-center justify-center drop-shadow-lg'>
+            <img
+              src={PANINO_IMG}
+              className='w-20 lg:w-40 -mt-10 lg:-mt-20 '
+              alt='I1'
+            />
+            <motion.div
+              whileTap={{ scale: 0.75 }}
+              className='w-8 h-8 rounded-full bg-red-600 flex items-center justify-center cursor-pointer hover:shadow-md -mt-8'
+              onClick={() =>
+                addItemToCart({
+                  category: 'panini',
+                  id: '999',
+                  imageURL: PANINO_IMG,
+                  qty: 1,
+                  title: 'Scegli tu',
+                })
+              }
+            >
+              <MdShoppingBasket className='text-white' />
+            </motion.div>
+            <p className='text-base lg:text-xl font-semibold text-textColor mt-2 lg:mt-4'>
+              Panino a sorpresa
+            </p>
+
+            <p className='text-[12px] lg:text-sm text-lighttextGray font-semibold my-1 lg:my-3'>
+              {'Panino scelto dalla casa'}
+            </p>
+
+            <p className='text-sm font-semibold text-headingColor'></p>
+          </div>
         </div>
       </div>
     </section>

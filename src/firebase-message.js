@@ -8,7 +8,7 @@ export const getTokenFunc = (setTokenFound) => {
   })
     .then((currentToken) => {
       if (currentToken) {
-        console.log('current token for client: ', currentToken);
+        // console.log('current token for client: ', currentToken);
         setTokenFound(true);
         // Track the token -> client mapping, by sending to backend server
         // show on the UI that permission is secured
@@ -28,7 +28,7 @@ export const getTokenFunc = (setTokenFound) => {
 
 export const onMessageListener = () =>
   new Promise((resolve) => {
-    console.log('onMessageListener');
+    // console.log('onMessageListener');
     onMessage(messaging, (payload) => {
       console.log('mss list arrived');
       resolve(payload);

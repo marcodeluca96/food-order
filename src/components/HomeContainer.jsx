@@ -72,17 +72,16 @@ const HomeContainer = ({ scrollToMenu }) => {
           Benvenuto, qui potrai ordinare il tuo pranzo. <br />
           <b>Attenzione! </b>
           <br />
-          Ora si potranno effettuare più ordini (nel caso qualcuno voglia
-          aggiungere qualcosa dopo) ed eliminare i vostri ordini (in caso vi sia
-          passata la fame &#128514;). Tutto questo si può fare<b>
-            {' '}
-            entro{' '}
-          </b>le <b>12:40 </b>
+          Per facilizzare e velocizzare il lavoro delle commesse vi prego di
+          scegliere il panino a sorpresa in modo da unificare gli ordini, sempre
+          che non abbiate particolari esigenza/intolleranze.
+          <br />
+          Si prega di effettuare gli ordini <b>entro </b>le <b>12:40 </b>
           del giorno corrente.
           <br />
-          Se vuoi qualcosa che non è presente nel menù chiedi e ti sarà dato.
+          Se hai esigenze particolari è presente un campo note nel carrello.
           <br />
-          Grazie &#128536;
+          Grazie.
         </p>
 
         <button

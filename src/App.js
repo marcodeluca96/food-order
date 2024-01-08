@@ -62,9 +62,7 @@ const App = () => {
             {user && user.email === 'marco.deluca@weavesrl.com' && (
               <Route path='/admin-order' element={<AdminOrder />} />
             )}
-            {user && user.email === 'marco.deluca@weavesrl.com' && (
-              <Route path='/summary-order' element={<SummaryOrder />} />
-            )}
+            {user && <Route path='/summary-order' element={<SummaryOrder />} />}
           </Routes>
         </main>
       </div>

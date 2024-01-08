@@ -73,7 +73,7 @@ const Header = () => {
                 <Link to={'/today-order'}>Ordine</Link>
               </li>
             )}
-            {user && user.email === 'marco.deluca@weavesrl.com' && (
+            {user && (
               <li className='text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
                 <Link to={'/summary-order'}>Summary</Link>
               </li>
@@ -195,7 +195,7 @@ const Header = () => {
                   >
                     <Link to={'/today-order'}>Ordine</Link>
                   </li>
-                  {user && user.email === 'marco.deluca@weavesrl.com' && (
+                  {user && (
                     <li
                       className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2'
                       onClick={() => setIsMenu(false)}

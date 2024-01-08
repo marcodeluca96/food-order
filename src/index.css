@@ -108,6 +108,29 @@ input:hover {
   }
 }
 
+/* popup at start */
+.popup-at-start {
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: #a7a7a775;
+}
+
+.popup-at-start > div {
+  background-color: rgba(255, 255, 255, 0.866);
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+  border-radius: 20px;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
